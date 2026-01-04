@@ -47,14 +47,14 @@ async function scrape() {
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>DEBE</title>
+  <title>TAKİP</title>
 </head>
 <body>
   <h2>Partial Index Listesi</h2>
   ${listItemsHtml}
   
   <button id="fetchEntries">Seçilenleri Çek</button>
-  <button id="openEntry">Entry Dosyasını Aç</button>
+  <button id="openEntry">takipEntry Dosyasını Aç</button>
 
   <script>
     document.getElementById("fetchEntries").addEventListener("click", async () => {
@@ -78,22 +78,22 @@ async function scrape() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ links: checkedLinks })
         });
-        alert("entry.html dosyası güncellendi!");
+        alert("takipentry.html dosyası güncellendi!");
       } catch (e) {
         alert("Sunucuya bağlanılamadı. (Backend çalışıyor mu?)");
       }
     });
 
     document.getElementById("openEntry").addEventListener("click", () => {
-      window.open("entry.html", "_blank");
+      window.open("takipentry.html", "_blank");
     });
   </script>
 </body>
 </html>
 `;
 
-    fs.writeFileSync("debe.html", finalHtml, "utf-8");
-    console.log("✅ İşlem tamam! 'debe.html' senin istediğin tasarımda oluşturuldu.");
+    fs.writeFileSync("takip.html", finalHtml, "utf-8");
+    console.log("✅ İşlem tamam! 'takip.html' senin istediğin tasarımda oluşturuldu.");
 
   } catch (err) {
     console.error("❌ Hata:", err.message);
