@@ -174,3 +174,7 @@ app.listen(3000, () => {
     console.log("📂 2. Başlıkları seçip 'Seçilenleri Çek' butonuna basın.");
     console.log("------------------------------------------");
 });
+
+//node debe.js
+//node index.js
+//node server.js
