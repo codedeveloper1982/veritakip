@@ -33,6 +33,12 @@ app.post("/scrape-entries", async (req, res) => {
     color: #17FF00 !important; /* Yazar isimleri yeşil görünsün */
     text-decoration: none;
 }
+    a.url {
+  color: red;
+}
+a.url:visited {
+  color: rgb(0, 255, 213);
+}
         </style>
     </head>
     <body>`;
@@ -83,9 +89,9 @@ $(".content").each((i, el) => {
     <script>
     var punto = 57;
     var scrl = 2;
-    var artis = 1;
+    var artis = 12;
     var ilk_bas = false;
-    var ilk_bas_tekrari = 3;
+    var ilk_bas_tekrari = 12;
     var hiz = 0;
     var yon = 0;
     var dongu = null;
@@ -138,19 +144,38 @@ $(".content").each((i, el) => {
         ilk_bas = true; durdur(); git(); 
     }
     function durdur() { clearInterval(dongu); }
-    function dur() { ilk_bas = false; yon = 0; hiz = 0; durdur(); }
+    function dur() { ilk_bas = false;    if (hiz != 0) {ilk_bas_tekrari = hiz;} yon = 0; hiz = 0; durdur(); }
 
-    function git() {
-        if (yon == 0) return;
-        var intervlhiz = 480 / Math.abs(yon);
-        dongu = setInterval(() => {
-            var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-            var currentScroll = window.scrollY;
-            var miktar = Math.round((currentScroll / maxScroll) * 100);
-            header.innerHTML = "%" + miktar + "<br>hız:" + hiz;
-            window.scrollBy(0, Math.sign(yon));
-        }, intervlhiz);
-    }
+function git() {
+    if (yon === 0) return;
+    var intervlhiz = 480 / Math.abs(yon);
+    dongu = setInterval(() => {
+        var maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        var currentScroll = window.scrollY;
+        var miktar = Math.round((currentScroll / maxScroll) * 100);
+
+        // kalan mesafe
+        var kalanMesafe = maxScroll - currentScroll;
+
+        // hız: her intervalde kaç px kaydırıyorsun
+        var pxPerStep = Math.sign(yon); 
+        var stepsNeeded = kalanMesafe / Math.abs(pxPerStep);
+
+        // kalan süre (ms cinsinden)
+        var kalanSureMs = stepsNeeded * intervlhiz;
+
+        // dakika ve saniye
+        var dakika = Math.floor(kalanSureMs / 60000);
+        var saniye = Math.floor((kalanSureMs % 60000) / 1000);
+
+        header.innerHTML = "%" + miktar + "<br>" +
+            dakika + ":" + (saniye < 10 ? "0" + saniye : saniye) +
+            "<br>hız:" + hiz;
+
+        window.scrollBy(0, pxPerStep);
+    }, intervlhiz);
+}
+
 
     function sizedown() { boyut -= artis; metinleriGuncelle(); }
     function sizeup() { boyut += artis; metinleriGuncelle(); }
