@@ -3,369 +3,205 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>TAKİP</title>
+  <title>TAKİP - Seçim Paneli</title>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+    input[type="checkbox"] { cursor: pointer; margin-left: 10px; }
+    button { padding: 10px 15px; margin-right: 10px; cursor: pointer; border-radius: 5px; border: 1px solid #999; }
+    #fetchEntries { background-color: #4CAF50; color: white; border: none; }
+  </style>
 </head>
 <body>
-  <h2>Partial Index Listesi</h2>
-  <ol><li>
- <a href="/erkeklerin-en-degerli-oldugu-yas--7316000?a=buddyrecent">
-    erkeklerin en değerli olduğu yaş
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-0">
-</li>
-<li>
- <a href="/bilinen-en-sasirtici-tarihi-bilgi--6514752?a=buddyrecent">
-    bilinen en şaşırtıcı tarihi bilgi
-    <div class="detail">imfuckinluvmyboobs</div>
-  </a> 
-<input type="checkbox" name="check-1">
-</li>
-<li>
- <a href="/oreshnik--7904737?a=buddyrecent">
-    oreshnik
-    <div class="detail">imfuckinluvmyboobs</div>
-  </a> 
-<input type="checkbox" name="check-2">
-</li>
-<li>
- <a href="/gune-bir-tavsiye-birak--6271787?a=buddyrecent">
-    güne bir tavsiye bırak
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-3">
-</li>
-<li>
- <a href="/twitter--1663823?a=buddyrecent">
-    twitter
-    <div class="detail">daimat</div>
-  </a> 
-<input type="checkbox" name="check-4">
-</li>
-<li>
- <a href="/soylemek-istenip-de-soylenemeyenler--925858?a=buddyrecent">
-    söylemek istenip de söylenemeyenler
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-5">
-</li>
-<li>
- <a href="/rusya-ukrayna-savasi--4263453?a=buddyrecent">
+  <h2>Takip Listesi Başlıkları</h2>
+  
+    <div id="bulk-selectors" style="margin: 20px 0; padding: 15px; border: 1px dashed #222; background: #f0f0f0; font-family: sans-serif;">
+      <strong>Hızlı Seçim:</strong><br><br>
+      <label><input type="checkbox" id="g1"> 1-11</label> | 
+      <label><input type="checkbox" id="g2"> 12-22</label> | 
+      <label><input type="checkbox" id="g3"> 23-33</label> | 
+      <label><input type="checkbox" id="g4"> 33+ Sonrası</label>
+    </div>
+    
+  <ol id='list-container'><li style="margin-bottom: 5px;"> <a href="/geist--101585?a=buddyrecent">
+    geist
+    <div class="detail">polly jean</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="0" name="check-0"></li><li style="margin-bottom: 5px;"> <a href="/whod-have-known--2055963?a=buddyrecent">
+    who'd have known
+    <div class="detail">kimin tenisi daha buyuk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="1" name="check-1"></li><li style="margin-bottom: 5px;"> <a href="/siyasetname--72637?a=buddyrecent">
+    siyasetname
+    <div class="detail">motorcu cocuk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="2" name="check-2"></li><li style="margin-bottom: 5px;"> <a href="/sosyalizm--47030?a=buddyrecent">
+    sosyalizm
+    <div class="detail">shinigami ryuk, 1123581321</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="3" name="check-3"></li><li style="margin-bottom: 5px;"> <a href="/huseyin-nihal-atsiz--148493?a=buddyrecent">
+    hüseyin nihal atsız
+    <div class="detail">pilav normal bence siz gerzeksiniz</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="4" name="check-4"></li><li style="margin-bottom: 5px;"> <a href="/rusya-ukrayna-savasi--4263453?a=buddyrecent">
     rusya ukrayna savaşı
-    <div class="detail">maarri, 1123581321, daimat</div>
-  </a> 
-<input type="checkbox" name="check-6">
-</li>
-<li>
- <a href="/sozluk-yazarlarinin-siirleri--629432?a=buddyrecent">
-    sözlük yazarlarının şiirleri
+    <div class="detail">maarri, 1123581321</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="5" name="check-5"></li><li style="margin-bottom: 5px;"> <a href="/kabullenince-huzur-veren-gercekler--7274887?a=buddyrecent">
+    kabullenince huzur veren gerçekler
     <div class="detail">animal deist</div>
-  </a> 
-<input type="checkbox" name="check-7">
-</li>
-<li>
- <a href="/geceye-bir-alinti-birak--6301033?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="6" name="check-6"></li><li style="margin-bottom: 5px;"> <a href="/fatih-sultan-mehmet--42269?a=buddyrecent">
+    fatih sultan mehmet
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="7" name="check-7"></li><li style="margin-bottom: 5px;"> <a href="/james-jesus-angleton--1638150?a=buddyrecent">
+    james jesus angleton
+    <div class="detail">i dont give a fuck about the world</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="8" name="check-8"></li><li style="margin-bottom: 5px;"> <a href="/cia--40706?a=buddyrecent">
+    cia
+    <div class="detail">i dont give a fuck about the world</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="9" name="check-9"></li><li style="margin-bottom: 5px;"> <a href="/x-2--3284745?a=buddyrecent">
+    x-2
+    <div class="detail">i dont give a fuck about the world</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="10" name="check-10"></li><li style="margin-bottom: 5px;"> <a href="/cok-gec--145712?a=buddyrecent">
+    çok geç
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="11" name="check-11"></li><li style="margin-bottom: 5px;"> <a href="/oreshnik--7904737?a=buddyrecent">
+    oreshnik
+    <div class="detail">1123581321, imfuckinluvmyboobs</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="12" name="check-12"></li><li style="margin-bottom: 5px;"> <a href="/10-ocak-2026-galatasaray-fenerbahce-maci--8061660?a=buddyrecent">
+    10 ocak 2026 galatasaray fenerbahçe maçı
+    <div class="detail">gedik ahmet pasha</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="13" name="check-13"></li><li style="margin-bottom: 5px;"> <a href="/geceye-bir-alinti-birak--6301033?a=buddyrecent">
     geceye bir alıntı bırak
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-8">
-</li>
-<li>
- <a href="/yazarlarin-en-kurt-ozelligi--7270220?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="14" name="check-14"></li><li style="margin-bottom: 5px;"> <a href="/dusun-ki-o-bunu-okuyor--3965692?a=buddyrecent">
+    düşün ki o bunu okuyor
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="15" name="check-15"></li><li style="margin-bottom: 5px;"> <a href="/huzurlu-bir-evin-olmazsa-olmazlari--7861044?a=buddyrecent">
+    huzurlu bir evin olmazsa olmazları
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="16" name="check-16"></li><li style="margin-bottom: 5px;"> <a href="/7-ocak-2026-gumruk-karari-cimer-itiraz-kampanyasi--8062875?a=buddyrecent">
+    7 ocak 2026 gümrük kararı cimer itiraz kampanyası
+    <div class="detail">9x</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="17" name="check-17"></li><li style="margin-bottom: 5px;"> <a href="/erkeklerin-en-degerli-oldugu-yas--7316000?a=buddyrecent">
+    erkeklerin en değerli olduğu yaş
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="18" name="check-18"></li><li style="margin-bottom: 5px;"> <a href="/bilinen-en-sasirtici-tarihi-bilgi--6514752?a=buddyrecent">
+    bilinen en şaşırtıcı tarihi bilgi
+    <div class="detail">imfuckinluvmyboobs</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="19" name="check-19"></li><li style="margin-bottom: 5px;"> <a href="/gune-bir-tavsiye-birak--6271787?a=buddyrecent">
+    güne bir tavsiye bırak
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="20" name="check-20"></li><li style="margin-bottom: 5px;"> <a href="/twitter--1663823?a=buddyrecent">
+    twitter
+    <div class="detail">daimat</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="21" name="check-21"></li><li style="margin-bottom: 5px;"> <a href="/soylemek-istenip-de-soylenemeyenler--925858?a=buddyrecent">
+    söylemek istenip de söylenemeyenler
+    <div class="detail">deep talk</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="22" name="check-22"></li><li style="margin-bottom: 5px;"> <a href="/sozluk-yazarlarinin-siirleri--629432?a=buddyrecent">
+    sözlük yazarlarının şiirleri
+    <div class="detail">animal deist</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="23" name="check-23"></li><li style="margin-bottom: 5px;"> <a href="/yazarlarin-en-kurt-ozelligi--7270220?a=buddyrecent">
     yazarların en kürt özelliği
     <div class="detail">laaa edriii</div>
-  </a> 
-<input type="checkbox" name="check-9">
-</li>
-<li>
- <a href="/sessiz-kismi-sesli-soylemek--8050905?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="24" name="check-24"></li><li style="margin-bottom: 5px;"> <a href="/sessiz-kismi-sesli-soylemek--8050905?a=buddyrecent">
     sessiz kısmı sesli söylemek
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-10">
-</li>
-<li>
- <a href="/devlettapar--7059550?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="25" name="check-25"></li><li style="margin-bottom: 5px;"> <a href="/devlettapar--7059550?a=buddyrecent">
     devlettapar
     <div class="detail">highpriestess</div>
-  </a> 
-<input type="checkbox" name="check-11">
-</li>
-<li>
- <a href="/arsiv-unutmaz--5100571?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="26" name="check-26"></li><li style="margin-bottom: 5px;"> <a href="/arsiv-unutmaz--5100571?a=buddyrecent">
     arşiv unutmaz
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-12">
-</li>
-<li>
- <a href="/prosopometamorphopsia--4984690?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="27" name="check-27"></li><li style="margin-bottom: 5px;"> <a href="/prosopometamorphopsia--4984690?a=buddyrecent">
     prosopometamorphopsia
     <div class="detail">highpriestess</div>
-  </a> 
-<input type="checkbox" name="check-13">
-</li>
-<li>
- <a href="/instagram--2543417?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="28" name="check-28"></li><li style="margin-bottom: 5px;"> <a href="/instagram--2543417?a=buddyrecent">
     instagram
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-14">
-</li>
-<li>
- <a href="/kimci--1180366?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="29" name="check-29"></li><li style="margin-bottom: 5px;"> <a href="/kimci--1180366?a=buddyrecent">
     kimçi
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-15">
-</li>
-<li>
- <a href="/post-pozitivizm--121405?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="30" name="check-30"></li><li style="margin-bottom: 5px;"> <a href="/post-pozitivizm--121405?a=buddyrecent">
     post pozitivizm
     <div class="detail">highpriestess</div>
-  </a> 
-<input type="checkbox" name="check-16">
-</li>
-<li>
- <a href="/halil-inalcikin-abartildigi-gercegi--6828896?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="31" name="check-31"></li><li style="margin-bottom: 5px;"> <a href="/halil-inalcikin-abartildigi-gercegi--6828896?a=buddyrecent">
     halil inalcık'ın abartıldığı gerçeği
     <div class="detail">erkeginyabancilasmasi, deep talk</div>
-  </a> 
-<input type="checkbox" name="check-17">
-</li>
-<li>
- <a href="/9-ocak-2026-son-videosunu-ceken-bahis-bagimlisi--8062671?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="32" name="check-32"></li><li style="margin-bottom: 5px;"> <a href="/9-ocak-2026-son-videosunu-ceken-bahis-bagimlisi--8062671?a=buddyrecent">
     9 ocak 2026 son videosunu çeken bahis bağımlısı
     <div class="detail">mertim1011</div>
-  </a> 
-<input type="checkbox" name="check-18">
-</li>
-<li>
- <a href="/en-yakin-arkadasinin-en-yakin-olmasinin-3-sebebi--7359919?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="33" name="check-33"></li><li style="margin-bottom: 5px;"> <a href="/en-yakin-arkadasinin-en-yakin-olmasinin-3-sebebi--7359919?a=buddyrecent">
     en yakın arkadaşının en yakın olmasının 3 sebebi
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-19">
-</li>
-<li>
- <a href="/coffy--2043698?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="34" name="check-34"></li><li style="margin-bottom: 5px;"> <a href="/coffy--2043698?a=buddyrecent">
     coffy
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-20">
-</li>
-<li>
- <a href="/borsa-istanbul--3559807?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="35" name="check-35"></li><li style="margin-bottom: 5px;"> <a href="/borsa-istanbul--3559807?a=buddyrecent">
     borsa istanbul
     <div class="detail">uzakyol kaptani, arkanabakmassankuserim, patanona matanona</div>
-  </a> 
-<input type="checkbox" name="check-21">
-</li>
-<li>
- <a href="/su-an-hissedilen-duygu--5746438?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="36" name="check-36"></li><li style="margin-bottom: 5px;"> <a href="/su-an-hissedilen-duygu--5746438?a=buddyrecent">
     şu an hissedilen duygu
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-22">
-</li>
-<li>
- <a href="/tuesday-morning-kill-list--8062689?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="37" name="check-37"></li><li style="margin-bottom: 5px;"> <a href="/tuesday-morning-kill-list--8062689?a=buddyrecent">
     tuesday morning kill list
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-23">
-</li>
-<li>
- <a href="/geceye-behzat-cden-bir-replik-birak--5756513?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="38" name="check-38"></li><li style="margin-bottom: 5px;"> <a href="/geceye-behzat-cden-bir-replik-birak--5756513?a=buddyrecent">
     geceye behzat ç'den bir replik bırak
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-24">
-</li>
-<li>
- <a href="/gune-bir-kedi-fotografi-birak--7311083?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="39" name="check-39"></li><li style="margin-bottom: 5px;"> <a href="/gune-bir-kedi-fotografi-birak--7311083?a=buddyrecent">
     güne bir kedi fotoğrafı bırak
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-25">
-</li>
-<li>
- <a href="/7-ocak-2026-gumruksuz-yurtdisi-alisverisin-bitmesi--8061759?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="40" name="check-40"></li><li style="margin-bottom: 5px;"> <a href="/7-ocak-2026-gumruksuz-yurtdisi-alisverisin-bitmesi--8061759?a=buddyrecent">
     7 ocak 2026 gümrüksüz yurtdışı alışverişin bitmesi
     <div class="detail">dragonlady, highpriestess</div>
-  </a> 
-<input type="checkbox" name="check-26">
-</li>
-<li>
- <a href="/8-ocak-2026-iran-protestolari--8062441?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="41" name="check-41"></li><li style="margin-bottom: 5px;"> <a href="/8-ocak-2026-iran-protestolari--8062441?a=buddyrecent">
     8 ocak 2026 iran protestoları
     <div class="detail">kazasker</div>
-  </a> 
-<input type="checkbox" name="check-27">
-</li>
-<li>
- <a href="/davaro--89446?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="42" name="check-42"></li><li style="margin-bottom: 5px;"> <a href="/davaro--89446?a=buddyrecent">
     davaro
     <div class="detail">gedik ahmet pasha</div>
-  </a> 
-<input type="checkbox" name="check-28">
-</li>
-<li>
- <a href="/yazarlara-whatsapptan-gelen-son-mesaj--4593981?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="43" name="check-43"></li><li style="margin-bottom: 5px;"> <a href="/yazarlara-whatsapptan-gelen-son-mesaj--4593981?a=buddyrecent">
     yazarlara whatsapp'tan gelen son mesaj
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-29">
-</li>
-<li>
- <a href="/3-ocak-2026-abdnin-maduro-ve-esini-kacirmasi--8060447?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="44" name="check-44"></li><li style="margin-bottom: 5px;"> <a href="/3-ocak-2026-abdnin-maduro-ve-esini-kacirmasi--8060447?a=buddyrecent">
     3 ocak 2026 abd'nin maduro ve eşini kaçırması
-    <div class="detail">dragonlady, i dont give a fuck about the world, daimat +1 takip</div>
-  </a> 
-<input type="checkbox" name="check-30">
-</li>
-<li>
- <a href="/gune-enstrumantal-bir-muzik-birak--7505273?a=buddyrecent">
+    <div class="detail">imfuckinluvmyboobs</div>
+  </a> <input type="checkbox" class="entry-cb" data-index="45" name="check-45"></li><li style="margin-bottom: 5px;"> <a href="/gune-enstrumantal-bir-muzik-birak--7505273?a=buddyrecent">
     güne enstrümantal bir müzik bırak
     <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-31">
-</li>
-<li>
- <a href="/yeni-baslayanlar-icin-lviv--7125338?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="46" name="check-46"></li><li style="margin-bottom: 5px;"> <a href="/yeni-baslayanlar-icin-lviv--7125338?a=buddyrecent">
     yeni başlayanlar için lviv
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-32">
-</li>
-<li>
- <a href="/oresnik-fuzesi--7943784?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="47" name="check-47"></li><li style="margin-bottom: 5px;"> <a href="/oresnik-fuzesi--7943784?a=buddyrecent">
     oreşnik füzesi
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-33">
-</li>
-<li>
- <a href="/do-brasil--8062583?a=buddyrecent">
+  </a> <input type="checkbox" class="entry-cb" data-index="48" name="check-48"></li><li style="margin-bottom: 5px;"> <a href="/do-brasil--8062583?a=buddyrecent">
     do brasil
     <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-34">
-</li>
-<li>
- <a href="/unutulmayan-garip-arkadaslar--3677741?a=buddyrecent">
-    unutulmayan garip arkadaşlar
-    <div class="detail">kimin tenisi daha buyuk</div>
-  </a> 
-<input type="checkbox" name="check-35">
-</li>
-<li>
- <a href="/mire-poix--3068835?a=buddyrecent">
-    mire poix
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-36">
-</li>
-<li>
- <a href="/gune-bir-siir-birak--5439717?a=buddyrecent">
-    güne bir şiir bırak
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-37">
-</li>
-<li>
- <a href="/2-6-milyar-dolarlik-figure-aiin-logomu-kullanmasi--8062425?a=buddyrecent">
-    2.6 milyar dolarlık figure ai'ın logomu kullanması
-    <div class="detail">mertim1011, erkeginyabancilasmasi</div>
-  </a> 
-<input type="checkbox" name="check-38">
-</li>
-<li>
- <a href="/xi-jinpingin-yuz-ifadesi--8022945?a=buddyrecent">
-    xi jinping'in yüz ifadesi
-    <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-39">
-</li>
-<li>
- <a href="/mehmet-kahraman--360414?a=buddyrecent">
-    mehmet kahraman
-    <div class="detail">i dont give a fuck about the world</div>
-  </a> 
-<input type="checkbox" name="check-40">
-</li>
-<li>
- <a href="/hayatla-olan-savasta-hangi-asamadasin--7789409?a=buddyrecent">
-    hayatla olan savaşta hangi aşamadasın
-    <div class="detail">polly jean</div>
-  </a> 
-<input type="checkbox" name="check-41">
-</li>
-<li>
- <a href="/ozel-egitim-ogrencilerine-27-yas-siniri--8062305?a=buddyrecent">
-    özel eğitim öğrencilerine 27 yaş sınırı
-    <div class="detail">pilav normal bence siz gerzeksiniz</div>
-  </a> 
-<input type="checkbox" name="check-42">
-</li>
-<li>
- <a href="/sozluk-yazarlarinin-cizimleri--3824175?a=buddyrecent">
-    sözlük yazarlarının çizimleri
-    <div class="detail">highpriestess</div>
-  </a> 
-<input type="checkbox" name="check-43">
-</li>
-<li>
- <a href="/32-yasinda-evi-arabasi-olmayan-erkek--8062296?a=buddyrecent">
-    32 yaşında evi arabası olmayan erkek
-    <div class="detail">dragonlady</div>
-  </a> 
-<input type="checkbox" name="check-44">
-</li>
-<li>
- <a href="/imfuckinluvmyboobs--6021371?a=buddyrecent">
-    imfuckinluvmyboobs
-    <div class="detail">kazasker</div>
-  </a> 
-<input type="checkbox" name="check-45">
-</li>
-<li>
- <a href="/arabada-opusenleri-ifsa-eden-kadin--8062299?a=buddyrecent">
-    arabada öpüşenleri ifşa eden kadın
-    <div class="detail">mertim1011</div>
-  </a> 
-<input type="checkbox" name="check-46">
-</li>
-<li>
- <a href="/victoria-3--4072346?a=buddyrecent">
-    victoria 3
-    <div class="detail">daimat</div>
-  </a> 
-<input type="checkbox" name="check-47">
-</li>
-<li>
- <a href="/2028-secimini-rtenin-kazanmasi-ihtimali--7274531?a=buddyrecent">
-    2028 seçimini rte'nin kazanması ihtimali
-    <div class="detail">motorcu cocuk</div>
-  </a> 
-<input type="checkbox" name="check-48">
-</li>
-<li>
- <a href="/kusbasi--74951?a=buddyrecent">
-    kuşbaşı
-    <div class="detail">deep talk</div>
-  </a> 
-<input type="checkbox" name="check-49">
-</li>
-</ol>
-  
+  </a> <input type="checkbox" class="entry-cb" data-index="49" name="check-49"></li></ol>
+  <hr>
   <button id="fetchEntries">Seçilenleri Çek</button>
   <button id="openEntry">takipEntry Dosyasını Aç</button>
 
   <script>
+    // 🔹 Toplu Seçim Mantığı
+    const groups = [
+      { id: "g1", start: 0, end: 10 },
+      { id: "g2", start: 11, end: 21 },
+      { id: "g3", start: 22, end: 32 },
+      { id: "g4", start: 33, end: 999 }
+    ];
+
+    groups.forEach(group => {
+      document.getElementById(group.id).addEventListener("change", (e) => {
+        const isChecked = e.target.checked;
+        const allCheckboxes = document.querySelectorAll(".entry-cb");
+        allCheckboxes.forEach((cb, index) => {
+          if (index >= group.start && index <= group.end) {
+            cb.checked = isChecked;
+          }
+        });
+      });
+    });
+
+    // 🔹 API'ye Gönderme Mantığı
     document.getElementById("fetchEntries").addEventListener("click", async () => {
       const checkedLinks = [];
-      document.querySelectorAll("ol li input[type=checkbox]:checked").forEach(cb => {
+      document.querySelectorAll(".entry-cb:checked").forEach(cb => {
         const anchor = cb.parentElement.querySelector("a");
         if (anchor) {
           const link = anchor.getAttribute("href");
@@ -384,9 +220,9 @@
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ links: checkedLinks })
         });
-        alert("takipentry.html dosyası güncellendi!");
+        alert(checkedLinks.length + " başlık gönderildi. takipentry.html güncelleniyor!");
       } catch (e) {
-        alert("Sunucuya bağlanılamadı. (Backend çalışıyor mu?)");
+        alert("Sunucu hatası! Backend'in çalıştığından emin olun.");
       }
     });
 

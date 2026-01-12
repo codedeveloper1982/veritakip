@@ -57,7 +57,7 @@ a.url:visited {
             const $ = cheerio.load(data);
             const title = $("#title").text().trim();
             
-            allHtml += `<section><h1>${title}</h1><ul id="entry-item-list">`;
+            allHtml += `<section><h6>${title}</h6><ul id="entry-item-list">`;
 
             // Sadece entry içeriklerini çekelim
 $(".content").each((i, el) => {
@@ -200,6 +200,14 @@ app.listen(3000, () => {
     console.log("------------------------------------------");
 });
 
-//node debe.js
-//node index.js
-//node server.js
+
+/*
+
+
+node index.js
+node server.js
+
+
+
+
+*/

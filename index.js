@@ -16,28 +16,33 @@ async function scrape() {
     const { data } = await axios.get(url, { headers });
     const $ = cheerio.load(data);
 
-    let listItemsHtml = "<ol>";
+    // 🔹 Toplu Seçim Paneli HTML
+    const bulkSelectorsHtml = `
+    <div id="bulk-selectors" style="margin: 20px 0; padding: 15px; border: 1px dashed #222; background: #f0f0f0; font-family: sans-serif;">
+      <strong>Hızlı Seçim:</strong><br><br>
+      <label><input type="checkbox" id="g1"> 1-11</label> | 
+      <label><input type="checkbox" id="g2"> 12-22</label> | 
+      <label><input type="checkbox" id="g3"> 23-33</label> | 
+      <label><input type="checkbox" id="g4"> 33+ Sonrası</label>
+    </div>
+    `;
 
-    // ul.topic-list.partial içindeki her bir li elemanını geziyoruz
+    let listItemsHtml = "<ol id='list-container'>";
+
     $("ul.topic-list.partial li").each((i, el) => {
-      // Önce bu li içinde bir kanal (span) var mı ona bakalım
       const span = $(el).find("span#filter-index-channel");
       const link = $(el).find("a");
 
-      listItemsHtml += `<li>`;
+      listItemsHtml += `<li style="margin-bottom: 5px;">`;
 
       if (span.length > 0) {
-        // Eğer bu bir kanal satırıysa (Örn: #spor, #siyaset)
-        const spanHtml = $.html(span);
-        listItemsHtml += `\n ${spanHtml} \n`;
+        listItemsHtml += ` ${$.html(span)} `;
       } else if (link.length > 0) {
-        // Eğer bu bir başlık satırıysa
-        const linkHtml = $.html(link);
-        listItemsHtml += `\n ${linkHtml} \n`;
+        listItemsHtml += ` ${$.html(link)} `;
       }
 
-      // Her li'nin sonuna checkbox ekliyoruz
-      listItemsHtml += `<input type="checkbox" name="check-${i}">\n</li>\n`;
+      // 🔹 Checkbox'lara 'class' ve 'data-index' ekliyoruz ki script kolayca bulsun
+      listItemsHtml += `<input type="checkbox" class="entry-cb" data-index="${i}" name="check-${i}"></li>`;
     });
 
     listItemsHtml += "</ol>";
@@ -47,19 +52,47 @@ async function scrape() {
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>TAKİP</title>
+  <title>TAKİP - Seçim Paneli</title>
+  <style>
+    body { font-family: sans-serif; line-height: 1.6; padding: 20px; }
+    input[type="checkbox"] { cursor: pointer; margin-left: 10px; }
+    button { padding: 10px 15px; margin-right: 10px; cursor: pointer; border-radius: 5px; border: 1px solid #999; }
+    #fetchEntries { background-color: #4CAF50; color: white; border: none; }
+  </style>
 </head>
 <body>
-  <h2>Partial Index Listesi</h2>
+  <h2>Takip Listesi Başlıkları</h2>
+  ${bulkSelectorsHtml}
   ${listItemsHtml}
-  
+  <hr>
   <button id="fetchEntries">Seçilenleri Çek</button>
   <button id="openEntry">takipEntry Dosyasını Aç</button>
 
   <script>
+    // 🔹 Toplu Seçim Mantığı
+    const groups = [
+      { id: "g1", start: 0, end: 10 },
+      { id: "g2", start: 11, end: 21 },
+      { id: "g3", start: 22, end: 32 },
+      { id: "g4", start: 33, end: 999 }
+    ];
+
+    groups.forEach(group => {
+      document.getElementById(group.id).addEventListener("change", (e) => {
+        const isChecked = e.target.checked;
+        const allCheckboxes = document.querySelectorAll(".entry-cb");
+        allCheckboxes.forEach((cb, index) => {
+          if (index >= group.start && index <= group.end) {
+            cb.checked = isChecked;
+          }
+        });
+      });
+    });
+
+    // 🔹 API'ye Gönderme Mantığı
     document.getElementById("fetchEntries").addEventListener("click", async () => {
       const checkedLinks = [];
-      document.querySelectorAll("ol li input[type=checkbox]:checked").forEach(cb => {
+      document.querySelectorAll(".entry-cb:checked").forEach(cb => {
         const anchor = cb.parentElement.querySelector("a");
         if (anchor) {
           const link = anchor.getAttribute("href");
@@ -78,9 +111,9 @@ async function scrape() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ links: checkedLinks })
         });
-        alert("takipentry.html dosyası güncellendi!");
+        alert(checkedLinks.length + " başlık gönderildi. takipentry.html güncelleniyor!");
       } catch (e) {
-        alert("Sunucuya bağlanılamadı. (Backend çalışıyor mu?)");
+        alert("Sunucu hatası! Backend'in çalıştığından emin olun.");
       }
     });
 
@@ -93,7 +126,7 @@ async function scrape() {
 `;
 
     fs.writeFileSync("takip.html", finalHtml, "utf-8");
-    console.log("✅ İşlem tamam! 'takip.html' senin istediğin tasarımda oluşturuldu.");
+    console.log("✅ 'takip.html' başarıyla oluşturuldu! Toplu seçim kutuları aktif.");
 
   } catch (err) {
     console.error("❌ Hata:", err.message);
