@@ -55,16 +55,29 @@ a.url:visited {
             });
 
             const $ = cheerio.load(data);
-            const title = $("#title").text().trim();
+            const titleElement = $("#title"); // Elemanı seç
+const titleText = titleElement.text().trim(); // Başlık metni
+const titleHref = titleElement.find("a").attr("href") || titleElement.attr("href") || "#"; // Linki bul
+// Eğer link göreceli ise (örn: /baslik/...) başına domain eklemek gerekebilir:
+const fullUrl = titleHref.startsWith('http') ? titleHref : `https://eksisozluk.com${titleHref}`;
             
-            allHtml += `<section><h1>${title}</h1><ul id="entry-item-list">`;
-
-            // Sadece entry içeriklerini çekelim
+allHtml += `<section>
+                <h1><a href="${fullUrl}" target="_blank" class="url">${titleText}</a></h1>
+                <ul id="entry-item-list">`;
+// Sadece entry içeriklerini çekelim
 $(".content").each((i, el) => {
-    const entryBody = $(el).html(); // Entry metni
-    
-    // Entry'nin hemen altındaki footer'ı bulalım
-    // Genellikle entry-item-list içindeki aynı li öğesinin içindedir
+    // .url sınıfına sahip OLMAYAN a etiketlerini seç
+    $(el).find("a:not(.url)").each((j, a) => {
+        let href = $(a).attr("href");
+        
+        // Eğer href "/" ile başlıyorsa başına domain ekle
+        if (href && href.startsWith("/")) {
+            $(a).attr("href", "https://eksisozluk.com" + href);
+            $(a).attr("target", "_blank"); 
+        }
+    });
+
+    const entryBody = $(el).html(); 
     const entryFooter = $(el).closest('li').find(".entry-footer-bottom").html() || "";
 
     allHtml += `
@@ -77,7 +90,7 @@ $(".content").each((i, el) => {
 });
 
             allHtml += `</ul></section><hr/>`;
-            console.log(`✅ Başarı: ${title}`);
+           console.log(`✅ Başarı: ${titleText}`);
         } catch (err) {
             console.error(`❌ Hata: ${url} ->`, err.message);
             allHtml += `<p style="color:red;">Hata: ${url} için veri alınamadı.</p>`;
