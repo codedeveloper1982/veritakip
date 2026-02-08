@@ -22,7 +22,7 @@ app.post("/scrape-entries", async (req, res) => {
             body { background: #111; color: #ccc; font-family: 'Sitka Text', serif; padding: 50px; line-height: 1.6; }
             section { margin-bottom: 50px; border-bottom: 1px dashed #444; padding-bottom: 20px; }
             h1#title { color: #17FF00; font-size: 24px; }
-            .content { margin-top: 10px; display: block; }
+            .content { margin-top: 10px;  margin-right: 50%; display: block; }
             .entry-author { color: #555; font-size: 0.8em; text-align: right; }
             hr { border: 0; border-top: 1px solid #333; margin: 40px 0; }
             .entry-footer {
